@@ -1,0 +1,175 @@
+{
+  "techniques": [
+    {
+      "id": "zero-shot",
+      "name": "Zero-Shot",
+      "description": "Direct instruction without examples. Best for simple, well-defined tasks.",
+      "template": "{{instruction}}\n\n{{input}}",
+      "variables": ["instruction", "input"],
+      "example": {
+        "instruction": "Classify the sentiment as positive, negative, or neutral:",
+        "input": "The product exceeded my expectations!"
+      }
+    },
+    {
+      "id": "few-shot",
+      "name": "Few-Shot",
+      "description": "Provide examples to guide the model's response format and style.",
+      "template": "{{examples}}\n\n{{input}}",
+      "variables": ["examples", "input"],
+      "example": {
+        "examples": "English: Hello\nFrench: Bonjour\n\nEnglish: Goodbye\nFrench: Au revoir",
+        "input": "English: Thank you"
+      }
+    },
+    {
+      "id": "chain-of-thought",
+      "name": "Chain-of-Thought (CoT)",
+      "description": "Encourage step-by-step reasoning for complex problems.",
+      "template": "{{problem}}\n\nLet's solve this step by step:\n{{steps}}",
+      "variables": ["problem", "steps"],
+      "example": {
+        "problem": "If a store sells apples for $2 each with a 20% discount on orders of 10+, how much do 15 apples cost?",
+        "steps": "1. Calculate base price\n2. Check discount eligibility\n3. Apply discount\n4. Calculate final cost"
+      }
+    },
+    {
+      "id": "role-based",
+      "name": "Role-Based",
+      "description": "Assign a specific role or expertise to the model.",
+      "template": "You are {{role}}.\n\n{{task}}",
+      "variables": ["role", "task"],
+      "example": {
+        "role": "an experienced Python developer with 10 years of expertise",
+        "task": "Review this code and suggest improvements for readability and performance."
+      }
+    },
+    {
+      "id": "structured-output",
+      "name": "Structured Output",
+      "description": "Request responses in a specific format (JSON, XML, table, etc.).",
+      "template": "{{task}}\n\nProvide your response in the following format:\n{{format}}",
+      "variables": ["task", "format"],
+      "example": {
+        "task": "Analyze this product review: 'Great quality but expensive'",
+        "format": "{\n  \"sentiment\": \"positive/negative/neutral\",\n  \"rating\": 1-5,\n  \"key_points\": []\n}"
+      }
+    },
+    {
+      "id": "constraint-based",
+      "name": "Constraint-Based",
+      "description": "Set clear boundaries and requirements for the response.",
+      "template": "{{task}}\n\nRequirements:\n{{constraints}}",
+      "variables": ["task", "constraints"],
+      "example": {
+        "task": "Write a product description for wireless headphones.",
+        "constraints": "- Exactly 100 words\n- Include: noise-cancelling, battery life\n- Tone: professional\n- No technical jargon"
+      }
+    },
+    {
+      "id": "contrastive",
+      "name": "Contrastive",
+      "description": "Show examples of good and bad responses to guide the model.",
+      "template": "{{task}}\n\nGood example: {{good_example}}\n\nBad example: {{bad_example}}\n\n{{input}}",
+      "variables": ["task", "good_example", "bad_example", "input"],
+      "example": {
+        "task": "Write a professional email response.",
+        "good_example": "Thank you for reaching out. I'd be happy to discuss this further...",
+        "bad_example": "Hey, yeah sure whatever works.",
+        "input": "Respond to: 'Can we reschedule to next Tuesday?'"
+      }
+    },
+    {
+      "id": "decomposition",
+      "name": "Decomposition",
+      "description": "Break complex tasks into smaller, manageable subtasks.",
+      "template": "Task: {{main_task}}\n\nBreak this down into steps:\n{{subtasks}}\n\nLet's start with: {{current_step}}",
+      "variables": ["main_task", "subtasks", "current_step"],
+      "example": {
+        "main_task": "Create a marketing strategy for a new coffee shop",
+        "subtasks": "1. Target audience\n2. Competitive analysis\n3. Marketing channels\n4. Budget",
+        "current_step": "#1 Target audience analysis"
+      }
+    },
+    {
+      "id": "meta-prompting",
+      "name": "Meta Prompting",
+      "description": "Instruct the AI about how to approach the problem before answering.",
+      "template": "Before answering, please:\n{{instructions}}\n\nQuestion: {{question}}",
+      "variables": ["instructions", "question"],
+      "example": {
+        "instructions": "1. Identify the question type\n2. List assumptions\n3. Outline your approach\n4. Provide your answer",
+        "question": "How can I improve my website's SEO?"
+      }
+    },
+    {
+      "id": "contextual",
+      "name": "Contextual",
+      "description": "Provide rich context to inform the model's response.",
+      "template": "Context: {{context}}\n\nQuestion: {{question}}",
+      "variables": ["context", "question"],
+      "example": {
+        "context": "I'm a startup founder with 50 beta users, $100K funding, pivoting from B2C to B2B SaaS.",
+        "question": "What should be my top 3 priorities for next quarter?"
+      }
+    },
+    {
+      "id": "negative",
+      "name": "Negative Prompting",
+      "description": "Specify what to avoid in the response.",
+      "template": "{{task}}\n\nDo NOT:\n{{avoid}}",
+      "variables": ["task", "avoid"],
+      "example": {
+        "task": "Explain blockchain to beginners in 200 words.",
+        "avoid": "- Use jargon without explanation\n- Assume prior knowledge\n- Include code examples"
+      }
+    },
+    {
+      "id": "socratic",
+      "name": "Socratic",
+      "description": "Use questions to guide discovery and learning.",
+      "template": "I want to learn about {{topic}}. Instead of explaining directly, ask me questions that will help me discover the concepts myself.",
+      "variables": ["topic"],
+      "example": {
+        "topic": "machine learning"
+      }
+    },
+    {
+      "id": "template-based",
+      "name": "Template-Based",
+      "description": "Use fill-in-the-blank structures for consistent outputs.",
+      "template": "Product: {{product}}\nTarget Audience: {{audience}}\nKey Benefit: {{benefit}}\nTone: {{tone}}\n\nGenerate: {{output_type}}",
+      "variables": ["product", "audience", "benefit", "tone", "output_type"],
+      "example": {
+        "product": "Smartphone",
+        "audience": "Young professionals",
+        "benefit": "Long battery life",
+        "tone": "Energetic",
+        "output_type": "50-word ad copy"
+      }
+    },
+    {
+      "id": "comparative",
+      "name": "Comparative",
+      "description": "Request comparison and contrast analysis.",
+      "template": "Compare and contrast: {{item1}} vs {{item2}}\n\nFocus on: {{aspects}}",
+      "variables": ["item1", "item2", "aspects"],
+      "example": {
+        "item1": "React",
+        "item2": "Vue.js",
+        "aspects": "Learning curve, performance, community size, use cases"
+      }
+    },
+    {
+      "id": "iterative-refinement",
+      "name": "Iterative Refinement",
+      "description": "Start simple, then progressively refine the output.",
+      "template": "{{initial_request}}\n\n[After first response]\n\nNow refine it: {{refinement}}",
+      "variables": ["initial_request", "refinement"],
+      "example": {
+        "initial_request": "Write a haiku about technology.",
+        "refinement": "Make it more emotional and focus on human connection."
+      }
+    }
+  ]
+}

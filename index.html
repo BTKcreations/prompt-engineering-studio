@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advanced prompt engineering studio for testing and comparing AI model responses">
+  <title>Prompt Engineering Studio | Ollama Multi-Model Testing</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/components.css">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">🧠</span>
+          <span>Prompt Engineering Studio</span>
+        </div>
+
+        <div class="header-actions">
+          <div class="flex items-center gap-sm">
+            <span id="statusDot" class="status-dot offline"></span>
+            <span id="connectionStatus" class="text-sm text-secondary">Connecting...</span>
+          </div>
+          <button id="exportBtn" class="btn btn-ghost" title="Export data">
+            💾 Export
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Left Sidebar - Techniques -->
+      <aside class="sidebar">
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <h2>🎨 Techniques</h2>
+          </div>
+          <div id="techniqueList" class="technique-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <h2>📚 History</h2>
+          </div>
+          <div id="historyList" class="history-list">
+            <!-- Dynamically populated -->
+          </div>
+          <button id="clearHistoryBtn" class="btn btn-ghost mt-lg" style="width: 100%">
+            Clear History
+          </button>
+        </div>
+      </aside>
+
+      <!-- Center - Prompt Builder & Results -->
+      <section class="flex flex-col gap-lg">
+        <!-- Prompt Builder -->
+        <div class="glass-card prompt-builder">
+          <div class="glass-card-header prompt-header">
+            <h2>✍️ Prompt Builder</h2>
+            <div class="prompt-actions">
+              <button id="clearBtn" class="btn btn-secondary">Clear</button>
+              <button id="generateBtn" class="btn btn-primary">🚀 Generate</button>
+            </div>
+          </div>
+
+          <!-- Template Variables (hidden by default) -->
+          <div id="templateVariables" class="template-variables hidden">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Prompt Input -->
+          <div class="input-group">
+            <div class="prompt-preview">
+              <label class="prompt-preview-label font-mono">Preview</label>
+              <textarea id="promptInput" class="textarea"
+                placeholder="Enter your prompt here or select a technique template from the sidebar..."
+                rows="10"></textarea>
+            </div>
+            <div id="charCount" class="char-count">0 characters</div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="results-container">
+          <div class="results-header">
+            <h2>📊 Results</h2>
+          </div>
+          <div id="resultsContainer" class="results-grid">
+            <!-- Dynamically populated with result cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Sidebar - Models & Metrics -->
+      <aside class="sidebar sidebar-right">
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <h2>🤖 Models</h2>
+          </div>
+
+          <!-- Pull Model Form -->
+          <div class="model-management">
+            <div class="pull-model-form">
+              <input type="text" id="pullModelInput" class="pull-model-input"
+                placeholder="Model name (e.g., llama2, mistral)" />
+              <button id="pullModelBtn" class="btn-pull">📥 Pull</button>
+            </div>
+
+            <!-- Progress Bar (hidden by default) -->
+            <div id="pullProgress" class="pull-progress hidden">
+              <div class="progress-status">
+                <span id="progressStatus">Downloading...</span>
+                <span id="progressPercentage">0%</span>
+              </div>
+              <div class="progress-bar">
+                <div id="progressFill" class="progress-bar-fill" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-between mb-md">
+            <button id="selectAllModelsBtn" class="btn btn-ghost text-sm">Select All</button>
+          </div>
+          <div id="modelSelector" class="model-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div id="metricsComparison" class="metrics-dashboard">
+            <h3>📈 Metrics</h3>
+            <p class="text-sm text-secondary">Run a test to see comparison metrics</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

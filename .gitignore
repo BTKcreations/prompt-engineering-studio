@@ -1,0 +1,4 @@
+# Prompt Engineering Studio artifacts
+*.log
+.DS_Store
+Thumbs.db
