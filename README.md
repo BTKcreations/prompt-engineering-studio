@@ -76,6 +76,8 @@ A modern, feature-rich web application for testing and comparing prompts across 
    - Direct file: `file:///path/to/index.html`
    - Local server: `http://localhost:8000`
 
+> **⚠️ Important:** The GitHub Pages deployment cannot connect to local Ollama due to browser CORS/mixed-content restrictions. For full functionality with Ollama, run the app locally using the commands above. See [DEPLOYMENT.md](DEPLOYMENT.md) for details.
+
 ### Quick Start
 
 1. **Check Connection**: The app will automatically connect to Ollama on startup
